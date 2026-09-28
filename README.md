@@ -1,25 +1,24 @@
 # ☕ Cafe Sales Data Cleaning & Reconstruction (MySQL)
 
 ## 📌 Business Overview
-Proyek ini bertujuan untuk melakukan **End-to-End Data Cleaning** pada dataset transaksi kafe (`dirty_cafe_sales.csv`) sebanyak ~10.000 baris. Dataset awal memiliki kendala kualitas data seperti string error (`'UNKNOWN'`, `'ERROR'`), missing values, serta inkonsistensi matematika pada kolom harga dan kuantitas.
+This project performs an **End-to-End Data Cleaning** pipeline on a transactional café dataset (`dirty_cafe_sales.csv`) comprising ~10,000 records. The raw dataset contained multiple data quality issues, including error strings (`'UNKNOWN'`, `'ERROR'`), missing values, and mathematical inconsistencies between unit prices, quantities, and total spending.
 
 ## 🎯 Key Objectives
-1. **Schema Standardization**: Menata skema tabel MySQL menggunakan tipe data `ENUM` dan `DATE`.
-2. **Mathematical Reconstruction**: Memperbaiki nilai transaksi yang hilang menggunakan pendekatan aljabar ($Total = Quantity \times Price$) dan logika katalog harga.
-3. **Audit & Validation**: Memastikan 0% error matematika dan integritas data 100% konsisten sebelum siap dipakai untuk analisis/dashboard.
+1. **Schema Standardization**: Define and enforce a structured MySQL table schema using appropriate `ENUM` and `DATE` data types.
+2. **Mathematical Reconstruction**: Restore missing transaction values using algebraic logic ($\text{Total} = \text{Quantity} \times \text{Price}$) and catalog price rules.
+3. **Audit & Validation**: Conduct quality assurance checks to ensure 0% mathematical error and 100% data integrity before deployment to production or BI dashboards.
 
 ## 🛠️ Tools & Technologies
 - **Database**: MySQL Server
-- **Data Export**: Python (`pandas`, `mysql-connector`) / MySQL CLI
+- **Data Processing & Export**: Python (`pandas`, `mysql-connector`) / MySQL CLI
 - **Version Control**: Git & GitHub
 
 ## 🧹 Cleaning Workflow Highlights
-- **ENUM & Categorical Handling**: Mengubah teks invalid menjadi `NULL` murni tanpa merusak constraint skema.
-- **Deductive Price Mapping**:
+- **ENUM & Categorical Handling**: Replaced invalid placeholder strings (`'UNKNOWN'`, `'ERROR'`) with native `NULL` values to preserve schema constraints without dropping rows.
+- **Deductive Price Mapping**: Reconstructed unit prices and item names using the fixed menu price catalog:
   - `Cookie` = $1.00 | `Coffee` = $2.00 | `Tea` = $1.50
   - `Cake` / `Juice` = $3.00 | `Smoothie` / `Sandwich` = $4.00 | `Salad` = $5.00
-- **Math Auto-Correction**:
-  $$\text{price\_per\_unit} = \frac{\text{total\_spent}}{\text{quantity}}$$
+- **Automated Math Correction**: Calculated missing values dynamically using algebraic formulas: `price_per_unit` = `total_spent`/`quantity`.  
 
 ## 📊 Summary Comparison
 | Metric | Raw Dataset (`dirty_cafe_sales.csv`) | Clean Dataset (`cafe_sales_clean.csv`) |
