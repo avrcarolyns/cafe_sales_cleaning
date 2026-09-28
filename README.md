@@ -27,8 +27,3 @@ Proyek ini bertujuan untuk melakukan **End-to-End Data Cleaning** pada dataset t
 | **Total Rows** | 10,000 | 9,997 |
 | **Math Inconsistencies** | 1,000+ rows | **0 rows (0%)** |
 | **Invalid Enum/Date Strings** | Present (`UNKNOWN`/`ERROR`) | **Cleaned / Imputed** |
-
-## 🚀 How to Reproduce
-1. Clone repository ini:
-   ```bash
-   git clone [https://github.com/username-kamu/cafe-sales-data-cleaning.git](https://github.com/username-kamu/cafe-sales-data-cleaning.git)
